@@ -35,7 +35,7 @@ export default new Vuex.Store({
   },
   actions: {
     signIn({ commit }, data) {
-      commit('setSignInStatus', 'signing in...')
+      commit('setSignInStatus', 'signing in... ')
       return AuthAPI.signIn(data)
         .then(authentication => {
           console.log
