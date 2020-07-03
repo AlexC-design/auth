@@ -81,7 +81,10 @@
       :value="!currentUser ? 'Sign In' : 'Sign Out'"
       :class="!currentUser ? 'btn btn-primary' : 'btn btn-secondary'"
     />
+
     <div class="error" style="margin-top: 30px" v-if="error">{{ error }}</div>
+    <div style="margin-top: 30px; color: #2c3e50" v-if="signInStatus">{{ signInStatus }}</div>
+    
   </form>
 </template>
 
@@ -101,7 +104,7 @@ export default {
       showPassword: false
     };
   },
-  computed: mapState(["auth", "currentUser", "error"]),
+  computed: mapState(["auth", "currentUser", "error", "signInStatus"]),
   methods: {
     onSubmit() {
       if (!this.currentUser) {

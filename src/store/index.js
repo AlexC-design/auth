@@ -10,6 +10,7 @@ export default new Vuex.Store({
     auth: localStorage.authData ? JSON.parse(localStorage.authData) : null,
     currentUser: localStorage.authData ? JSON.parse(localStorage.authData).userName : null,
     error: null,
+    signInStatus: null,
     signUpStatus: null
   },
   mutations: {
@@ -27,10 +28,14 @@ export default new Vuex.Store({
     },
     setSignUpStatus(state, status) {
       state.signUpStatus = status;
+    },
+    setSignInStatus(state, status) {
+      state.signInStatus = status;
     }
   },
   actions: {
     signIn({ commit }, data) {
+      commit('setSignInStatus', 'signing in...')
       return AuthAPI.signIn(data)
         .then(authentication => {
           console.log
@@ -39,6 +44,7 @@ export default new Vuex.Store({
           localStorage.setItem('authData', JSON.stringify(authentication))
           commit('setAuth', authentication)
           commit('setError', null)
+          commit('setSignInStatus', null)
         })
         .catch((e) => {
           console.log(e);
