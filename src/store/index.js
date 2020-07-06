@@ -48,6 +48,7 @@ export default new Vuex.Store({
         })
         .catch((e) => {
           console.log(e);
+          commit('setSignInStatus', null)
           commit('setError', 'Authentication failed')
         })
     },
